@@ -1,3 +1,5 @@
+package unionFind;
+
 /**
  * Union Find interface.
  */

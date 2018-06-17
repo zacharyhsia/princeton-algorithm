@@ -1,3 +1,5 @@
+package unionFind;
+
 public class UFQuickFind implements UF {
     private int[] ids;
     private int count;

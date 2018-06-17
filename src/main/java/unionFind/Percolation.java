@@ -1,7 +1,9 @@
+package unionFind;
+
 import edu.princeton.cs.algs4.WeightedQuickUnionUF;
 
 /**
- * Percolation using union find.
+ * unionFind.Percolation using union find.
  */
 public class Percolation {
     private static final int DIRECTION_NUM = 4;
