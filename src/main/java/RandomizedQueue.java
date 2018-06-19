@@ -6,10 +6,12 @@ import java.util.NoSuchElementException;
 /**
  * A randomized queue is similar to a stack or queue, except that the item removed is chosen uniformly
  * at random from items in the data structure.
- * @param <T> Generic type of items
+ * @param <Item> Generic type of items
  */
-public class RandomizedQueue<T> implements Iterable<T> {
+public class RandomizedQueue<Item> implements Iterable<Item> {
     private static final int START_SIZE = 1;
+    private static final int ENLARGE_THRESHOLD = 2;
+    private static final int SHRINK_THRESHOLD = 4;
     private Object[] queue;
     private int size;
 
@@ -17,7 +19,7 @@ public class RandomizedQueue<T> implements Iterable<T> {
      * Construct an empty randomized queue.
      */
     public RandomizedQueue() {
-        queue = (T[]) new Object[START_SIZE];
+        queue = (Item[]) new Object[START_SIZE];
         size = 0;
     }
 
@@ -41,7 +43,7 @@ public class RandomizedQueue<T> implements Iterable<T> {
      * Add the item to queue.
      * @param item item to add
      */
-    public void enqueue(T item) {
+    public void enqueue(Item item) {
         if (item == null) {
             throw new IllegalArgumentException("Item cannot be null");
         }
@@ -50,7 +52,7 @@ public class RandomizedQueue<T> implements Iterable<T> {
         size++;
 
         // check if need to resize the array
-        if (size > queue.length / 2) {
+        if (size > queue.length / ENLARGE_THRESHOLD) {
             resize(queue.length * 2);
         }
     }
@@ -59,25 +61,26 @@ public class RandomizedQueue<T> implements Iterable<T> {
      * Remove and return a random item.
      * @return the item
      */
-    public T dequeue() {
+    public Item dequeue() {
         if (size == 0) {
             throw new NoSuchElementException("Cannot dequeue with an empty queue.");
         }
 
-        T res = null;
+        Item res = null;
         int randomIndex = 0;
 
         while (res == null) {
             randomIndex = StdRandom.uniform(0, size);
-            res = (T) queue[randomIndex];
+            res = (Item) queue[randomIndex];
         }
 
         // mark the object as deleted in array
         queue[randomIndex] = null;
+        size--;
 
         // check if resizing array is needed
-        if (size <= queue.length / 4) {
-            resize(queue.length / 4);
+        if (size <= queue.length / SHRINK_THRESHOLD) {
+            resize(queue.length / 2);
         }
 
         return res;
@@ -87,23 +90,23 @@ public class RandomizedQueue<T> implements Iterable<T> {
      * Return a random item (no remove).
      * @return a random item
      */
-    public T sample() {
+    public Item sample() {
         if (size == 0) {
             throw new NoSuchElementException("Cannot sample with an empty queue.");
         }
 
-        T res = null;
+        Item res = null;
 
         while (res == null) {
             int randomIndex = StdRandom.uniform(0, size);
-            res = (T) queue[randomIndex];
+            res = (Item) queue[randomIndex];
         }
 
         return res;
     }
 
     private void resize(int newSize) {
-        Object[] newQueue = (T[]) new Object[newSize];
+        Object[] newQueue = (Item[]) new Object[newSize];
         int i = 0;
         for (Object item: queue) {
             if (item != null) {
@@ -120,23 +123,35 @@ public class RandomizedQueue<T> implements Iterable<T> {
      * @return iterator
      */
     @Override
-    public Iterator<T> iterator() {
+    public Iterator<Item> iterator() {
         return new RandomizedQueueIterator();
     }
 
     /**
-     * The iterator of the RandomizedQueue.
+     * Itemhe iterator of the RandomizedQueue.
      */
-    class RandomizedQueueIterator implements Iterator<T> {
+    private class RandomizedQueueIterator implements Iterator<Item> {
+        private int[] randomIndexes = new int[size];
+        private int cur = 0;
 
-        @Override
-        public boolean hasNext() {
-            return false;
+        RandomizedQueueIterator() {
+            for (int i = 0; i < size; i++) {
+                randomIndexes[i] = i;
+            }
+
+            StdRandom.shuffle(randomIndexes);
         }
 
         @Override
-        public T next() {
-            return null;
+        public boolean hasNext() {
+            return cur != size;
+        }
+
+        @Override
+        public Item next() {
+            Item res = (Item) queue[randomIndexes[cur]];
+            cur++;
+            return res;
         }
 
         @Override

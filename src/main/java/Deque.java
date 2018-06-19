@@ -3,11 +3,11 @@ import java.util.NoSuchElementException;
 
 /**
  * A double-ended queue or deque.
- * @param <T>
+ * @param <Item>
  */
-public class Deque<T> implements Iterable<T> {
-    private ListNode<T> head;
-    private ListNode<T> tail;
+public class Deque<Item> implements Iterable<Item> {
+    private ListNode<Item> head;
+    private ListNode<Item> tail;
     private int size;
 
     /**
@@ -45,12 +45,12 @@ public class Deque<T> implements Iterable<T> {
      * Add an item to the front/head.
      * @param item item to add.
      */
-    public void addFirst(T item) {
+    public void addFirst(Item item) {
         if (item == null) {
             throw new IllegalArgumentException("Item cannot be null");
         }
 
-        ListNode<T> newNode = new ListNode<>(item);
+        ListNode<Item> newNode = new ListNode<>(item);
 
         newNode.next = head.next;
         newNode.pre = head;
@@ -65,12 +65,12 @@ public class Deque<T> implements Iterable<T> {
      * Add an item to the end/tail.
      * @param item item to add
      */
-    public void addLast(T item) {
+    public void addLast(Item item) {
         if (item == null) {
             throw new IllegalArgumentException("Item cannot be null");
         }
 
-        ListNode<T> newNode = new ListNode<>(item);
+        ListNode<Item> newNode = new ListNode<>(item);
 
         newNode.next = tail;
         newNode.pre = tail.pre;
@@ -85,12 +85,12 @@ public class Deque<T> implements Iterable<T> {
      * Remove and return the first item.
      * @return the first item
      */
-    public T removeFirst() {
+    public Item removeFirst() {
         if (size == 0) {
             throw new NoSuchElementException("No such an element");
         }
 
-        ListNode<T> node = head.next;
+        ListNode<Item> node = head.next;
         head.next = node.next;
         node.next.pre = head;
 
@@ -102,12 +102,12 @@ public class Deque<T> implements Iterable<T> {
      * Remove and return the last item.
      * @return the last item
      */
-    public T removeLast() {
+    public Item removeLast() {
         if (size == 0) {
             throw new NoSuchElementException("No such an element");
         }
 
-        ListNode<T> node = tail.pre;
+        ListNode<Item> node = tail.pre;
         node.pre.next = tail;
         tail.pre = node.pre;
 
@@ -117,15 +117,15 @@ public class Deque<T> implements Iterable<T> {
 
 
     @Override
-    public Iterator<T> iterator() {
+    public Iterator<Item> iterator() {
         return new DequeIterator();
     }
 
     /**
      * Iterator of deque.
      */
-    class DequeIterator implements Iterator<T> {
-        private ListNode<T> cur = head.next;
+    private class DequeIterator implements Iterator<Item> {
+        private ListNode<Item> cur = head.next;
 
         @Override
         public boolean hasNext() {
@@ -133,12 +133,12 @@ public class Deque<T> implements Iterable<T> {
         }
 
         @Override
-        public T next() {
+        public Item next() {
             if (!hasNext()) {
                 throw new NoSuchElementException("No more element.");
             }
 
-            T res = cur.value;
+            Item res = cur.value;
 
             cur = cur.next;
 
@@ -153,20 +153,15 @@ public class Deque<T> implements Iterable<T> {
 
     /**
      * ListNode.
-     * @param <T> Generic type item.
+     * @param <Item> Generic type item.
      */
-    class ListNode<T> {
-        private T value;
-        private ListNode<T> next;
-        private ListNode<T> pre;
+    private class ListNode<Item> {
+        private Item value;
+        private ListNode<Item> next;
+        private ListNode<Item> pre;
 
-        ListNode(T item) {
+        ListNode(Item item) {
             this.value = item;
         }
     }
-//    Throw a java.lang.IllegalArgumentException if the client calls either addFirst() or addLast() with a null argument.
-//    Throw a java.util.NoSuchElementException if the client calls either removeFirst() or removeLast when the deque is empty.
-//    Throw a java.util.NoSuchElementException if the client calls the next() method in the iterator when there are no more items to return.
-//    Throw a java.lang.UnsupportedOperationException if the client calls the remove() method in the iterator.
-
 }
