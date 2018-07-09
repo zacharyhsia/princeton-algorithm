@@ -1,4 +1,4 @@
-package unionFind;
+package week1;
 
 public class UFQuickFind implements UF {
     private int[] ids;

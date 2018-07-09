@@ -1,4 +1,4 @@
-package unionFind;
+package week1;
 
 /**
  * Lazy approach.

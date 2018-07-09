@@ -1,6 +1,6 @@
-import unionFind.UF;
-import unionFind.UFQuickFind;
-import unionFind.UFQuickUnionNaive;
+import week1.UF;
+import week1.UFQuickFind;
+import week1.UFQuickUnionNaive;
 import edu.princeton.cs.algs4.StdIn;
 import edu.princeton.cs.algs4.StdOut;
 import org.junit.Before;

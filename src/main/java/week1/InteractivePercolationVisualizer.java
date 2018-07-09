@@ -1,7 +1,7 @@
-package unionFind; /******************************************************************************
- *  Compilation:  javac unionFind.InteractivePercolationVisualizer.java
- *  Execution:    java unionFind.InteractivePercolationVisualizer n
- *  Dependencies: unionFind.PercolationVisualizer.java unionFind.Percolation.java
+package week1; /******************************************************************************
+ *  Compilation:  javac week1.InteractivePercolationVisualizer.java
+ *  Execution:    java week1.InteractivePercolationVisualizer n
+ *  Dependencies: week1.PercolationVisualizer.java week1.Percolation.java
  *                StdDraw.java StdOut.java
  *
  *  This program takes the grid size n as a command-line argument.

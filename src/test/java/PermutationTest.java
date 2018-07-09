@@ -1,12 +1,11 @@
 import edu.princeton.cs.algs4.StdIn;
 import edu.princeton.cs.algs4.StdOut;
 import org.junit.Test;
+import week2.RandomizedQueue;
 
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-
-import static org.junit.Assert.*;
 
 public class PermutationTest {
     @Test

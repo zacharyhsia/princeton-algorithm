@@ -1,7 +1,6 @@
 import org.junit.Before;
 import org.junit.Test;
-
-import java.util.Iterator;
+import week2.RandomizedQueue;
 
 import static org.junit.Assert.*;
 

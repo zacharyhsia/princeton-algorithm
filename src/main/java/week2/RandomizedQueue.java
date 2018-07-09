@@ -1,3 +1,5 @@
+package week2;
+
 import edu.princeton.cs.algs4.StdRandom;
 
 import java.util.Iterator;
@@ -128,7 +130,7 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
     }
 
     /**
-     * Itemhe iterator of the RandomizedQueue.
+     * Itemhe iterator of the week2.RandomizedQueue.
      */
     private class RandomizedQueueIterator implements Iterator<Item> {
         private int[] randomIndexes = new int[size];

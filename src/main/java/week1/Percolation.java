@@ -1,9 +1,9 @@
-package unionFind;
+package week1;
 
 import edu.princeton.cs.algs4.WeightedQuickUnionUF;
 
 /**
- * unionFind.Percolation using union find.
+ * week1.Percolation using union find.
  */
 public class Percolation {
     private static final int DIRECTION_NUM = 4;

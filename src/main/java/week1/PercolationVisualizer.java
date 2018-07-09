@@ -1,7 +1,7 @@
-package unionFind; /******************************************************************************
- *  Compilation:  javac unionFind.PercolationVisualizer.java
- *  Execution:    java unionFind.PercolationVisualizer input.txt
- *  Dependencies: unionFind.Percolation.java
+package week1; /******************************************************************************
+ *  Compilation:  javac week1.PercolationVisualizer.java
+ *  Execution:    java week1.PercolationVisualizer input.txt
+ *  Dependencies: week1.Percolation.java
  *
  *  This program takes the name of a file as a command-line argument.
  *  From that file, it
